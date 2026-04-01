@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aroma Celeste</title>
+
+<!-- Elegant Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #fff0f5;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ff4d88;
+    text-shadow: 0 0 8px #ff85a2, 0 0 15px #ffc1d6;
+}
+
+img { max-width: 100%; display: block; }
+
+button {
+    padding: 12px 24px;
+    border: none;
+    background: #ff4d88;
+    color: white;
+    font-size: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #ff85a2;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff4d88, 0 0 30px #ffc1d6;
+}
+
+/* INTRO */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #ffd6e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeOut 1s ease forwards;
+    animation-delay: 2s;
+}
+
+#intro h1 {
+    font-size: 32px;
+    animation: glowText 1.5s infinite alternate;
+}
+
+@keyframes glowText {
+    from { text-shadow: 0 0 10px #ff4d88; }
+    to { text-shadow: 0 0 30px #ff85a2; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* WELCOME */
+#welcome {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+#welcome img {
+    width: 140px;
+    margin-bottom: 15px;
+    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 0 15px #ff85a2;
+    border-radius: 50%;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#welcome p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* PRODUCTS */
+#products {
+    display: none;
+    padding: 20px 15px;
+}
+
+.divider {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.product {
+    background: white;
+    border-radius: 15px;
+    padding: 10px;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #ffd1e6;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #ff85a2;
+}
+
+.product img {
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.product h3 {
+    font-size: 15px;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .divider { grid-template-columns: 1fr; }
+}
+
+/* MODAL */
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1000;
+}
+
+#modal img {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px #ff85a2;
+}
+
+#details {
+    color: white;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.messenger-btn {
+    margin-top: 15px;
+    background: #0084ff;
+    width: 80%;
+    max-width: 250px;
+}
+
+#closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <h1>Aroma Celeste</h1>
+</div>
+
+<div id="welcome">
+    <img src="logo.png" alt="Logo">
+    <h2>Welcome to Aroma Celeste</h2>
+    <p>Luxury scents that elevate your space</p>
+    <button onclick="enterSite()">Enter Shop</button>
+</div>
+
+<div id="products">
+    <h1>Our Products</h1>
+
+    <div class="divider">
+        <div class="product">
+            <img loading="lazy" src="product1.jpg" onclick="showProduct('product1.jpg','Floral Bliss - Soft, calming, and elegant fragrance.')">
+            <h3>Floral Bliss</h3>
+        </div>
+
+        <div class="product">
+            <img loading="lazy" src="product2.jpg" onclick="showProduct('product2.jpg','Berry Luxe - Sweet and vibrant everyday scent.')">
+            <h3>Berry Luxe</h3>
+        </div>
+    </div>
+</div>
+
+<div id="modal">
+    <button id="closeBtn" onclick="closeModal(event)">✕</button>
+    <img id="modalImg">
+    <div id="details"></div>
+    <a id="messengerLink" target="_blank">
+        <button class="messenger-btn">Message Us on Messenger</button>
+    </a>
+</div>
+
+<script>
+function enterSite() {
+    document.getElementById("welcome").style.display = "none";
+    document.getElementById("products").style.display = "block";
+}
+
+function showProduct(img, text) {
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("modalImg").src = img;
+    document.getElementById("details").innerText = text;
+    document.getElementById("messengerLink").href = "https://m.me/yourusername";
+}
+
+function closeModal(event) {
+    if (event) event.stopPropagation();
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
